@@ -31,3 +31,9 @@ Cypress.Commands.add('templatePost', (obj, builder) => {
         expect(obj.body.data[key]).to.eq(value)
     });
 });
+
+Cypress.Commands.add('templatePut', (obj) => {
+    // Test
+    expect(obj.status).to.equal(200)
+    expect(obj.body.message).to.be.a('string')
+});
