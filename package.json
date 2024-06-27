@@ -12,6 +12,7 @@
     "cypress": "^13.6.3"
   },
   "dependencies": {
+    "firebase": "^10.12.2",
     "puppeteer": "^22.8.0"
   }
 }
