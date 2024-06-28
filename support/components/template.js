@@ -50,13 +50,12 @@ Cypress.Commands.add('templatePagination', (url, max) => {
 });
 
 Cypress.Commands.add('templateValidateColumn', (data, obj, dataType, nullable) => {
-    // Test
-    data.forEach((item) => {
-        expect(item).to.be.an('object')
+    const dataArray = Array.isArray(data) ? data : [data];
 
+    dataArray.forEach((item) => {
+        expect(item).to.be.an('object')
         obj.forEach((field) => {
             expect(item).to.have.property(field)
-
             if (nullable && item[field] === null) {
                 expect(item[field]).to.be.null
             } else {
