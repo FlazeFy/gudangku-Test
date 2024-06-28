@@ -38,6 +38,7 @@ puppeteer.launch({ headless: false }).then(async (browser) => {
                 password: password,
             },
             tested_at: date,
+            tc_base_url: BASEURL
         };
         await add_firestore(data, 'test_audit_gudangku')
 

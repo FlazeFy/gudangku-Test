@@ -48,6 +48,7 @@ puppeteer.launch({ headless: false }).then(async (browser) => {
             },
             tc_evidence_name: [`TC-003-Step 3.1-Result on ${date}.png`,`TC-003-Step 3.2-Result on ${date}.png`],
             tested_at: date,
+            tc_base_url: BASEURL
         };
         await add_firestore(data, 'test_audit_gudangku')
 
