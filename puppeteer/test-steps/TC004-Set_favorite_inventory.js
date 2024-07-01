@@ -34,8 +34,8 @@ puppeteer.launch({ headless: false }).then(async (browser) => {
 
         for (let i = 0; i < rows.length; i++) {
             const firstFavorite = await page.evaluate((row, rowIndex) => {
-                const td_favorite = row.querySelectorAll('td')[10]; // is favorite column
-                const td_name = row.querySelectorAll('td')[0]; // inventory name column
+                const td_favorite = row.querySelectorAll('td')[10] // is favorite column
+                const td_name = row.querySelectorAll('td')[0] // inventory name column
         
                 if (td_favorite) {
                     const input = td_favorite.querySelector('input[name="is_favorite"]')
