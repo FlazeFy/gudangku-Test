@@ -6,7 +6,7 @@ describe('GudangKu E2E Test - TC-AU-002 - Auth', () => {
 
     it('Pengguna Tidak Dapat Login Menggunakan Password Yang Salah', () => {
         // Step 1: Pengguna membuka halaman login
-        cy.visit(`${BASEURL}/`)
+        cy.visit(`${BASEURL}/login`)
 
         // Step 2: Pengguna mengisikan form login
         cy.get('#username-input').type(username)
