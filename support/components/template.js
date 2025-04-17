@@ -76,3 +76,15 @@ Cypress.Commands.add('templateValidateContain', (data, list, target) => {
         expect(list).to.include(item[target])
     });
 });
+
+Cypress.Commands.add('templateE2ELogin', (username, password) => {
+    const BASEURL = 'http://localhost:8000'
+    const date = new Date().toISOString().replace(/:/g, '-')
+
+    // Pre Condition : User Must Logged In To Their Account
+    cy.visit(`${BASEURL}/`)
+    cy.get('#username-input').type(username)
+    cy.get('#password-input').type(password)
+    cy.get('#submit-login-btn').click()
+    cy.url().should('include', '/')
+})

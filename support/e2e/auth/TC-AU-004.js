@@ -15,13 +15,13 @@ describe('GudangKu E2E Test - TC-AU-004 - Auth', () => {
         // Evidence - Step 2
         cy.screenshot(`TC-AU-002_Step-2-${date}`)
 
-       // Step 3: Pengguna menekan button submit
-       cy.get('#submit-login-btn').click()
-        
-       // Step 4: Setelah proses validasi, sistem akan menampilkan pesan "The password field must be at least 6 characters"
-       cy.get('#form-login').contains('The password field must be at least 6 characters')
-       // Expected Result
-       cy.url().should('include', '/')
+        // Step 3: Pengguna menekan button submit
+        cy.get('#submit-login-btn').click()
+            
+        // Step 4: Setelah proses validasi, sistem akan menampilkan pesan "The password field must be at least 6 characters"
+        cy.get('#form-login').contains('The password field must be at least 6 characters')
+        // Expected Result
+        cy.url().should('include', '/')
 
         // Evidence - Step 4
         cy.screenshot(`TC-AU-004_Step-4-${date}`)
