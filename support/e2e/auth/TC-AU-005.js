@@ -7,7 +7,7 @@ describe('GudangKu E2E Test - TC-AU-005 - Auth', () => {
     const date = new Date().toISOString().replace(/:/g, '-')
 
     it('Pengguna Dapat Keluar Dari Aplikasi', () => {
-        // Pre Condition : User Must Logged In To Their Account
+        // Pre Condition : Pengguna sudah melakukan login ke dalam aplikasi
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: Setelah Login, Pengguna menekan tombol menu Profile
             cy.get('#nav_profile_btn').click()

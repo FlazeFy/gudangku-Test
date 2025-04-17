@@ -7,13 +7,13 @@ describe('GudangKu E2E Test - TC-HS-001 - History', () => {
     const date = new Date().toISOString().replace(/:/g, '-')
 
     it('Pengguna Dapat Melihat Riwayat Aktivitas Pada Aplikasi', () => {
-        // Pre Condition : User Must Logged In To Their Account
+        // Pre Condition : Pengguna sudah melakukan login ke dalam aplikasi
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: Setelah Login, Pengguna menekan tombol menu History
             cy.get('#nav_history_btn').click()
             cy.url().should('include','/history')
             // Evidence - Step 1
-            cy.screenshot(`TC-AU-005_Step-1-${date}`)
+            cy.screenshot(`TC-HS-001_Step-1-${date}`)
 
             // Step 2: Terdapat sebuah list riwayat aktivitas yang berisi Context, Created At, and tombol Delete
             cy.get('#history_holder .history-box').each(($el) => {
