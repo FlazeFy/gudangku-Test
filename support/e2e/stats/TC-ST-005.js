@@ -1,19 +1,19 @@
 // Components
 import '../../components/template'
 
-describe('GudangKu E2E Test - TC-ST-003 - Stats', () => {
+describe('GudangKu E2E Test - TC-ST-005 - Stats', () => {
     const username = 'flazefy'
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
 
-    it('Pengguna Dapat Melihat Statistik Total Inventory Berdasarkan Room', () => {
+    it('Pengguna Dapat Melihat Statistik Total Inventory Berdasarkan Merk', () => {
         // Pre Condition : Pengguna sudah melakukan login ke dalam aplikasi
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: Setelah Login, Pengguna menekan tombol menu Stats
             cy.get('#nav_stats_btn').click()
             cy.url().should('include','/stats')
             // Evidence - Step 1
-            cy.screenshot(`TC-ST-003_Step-1-${date}`)    
+            cy.screenshot(`TC-ST-005_Step-1-${date}`)    
 
             // Step 2: Pastikan Pengguna memilih Chart Type "Top Chart" dan Toogle Total "Total By Item" pada Control Panel
             cy.get('.control-panel').should('exist').within(() => {
@@ -22,9 +22,9 @@ describe('GudangKu E2E Test - TC-ST-003 - Stats', () => {
                 cy.get('#toogle_total_view_select').should('exist').find('option:selected').should('have.text', 'Total By Item')
             })
             
-            // Step 3: Pada section "Total Item Inventory By Room", Pengguna dapat melihat statistik Pie Chart dan tabel Context dan Total
-            cy.get('#stats_total_inventory_by_room_holder').should('exist').prev('h2').should('have.text','Total Item Inventory By Room')
-            cy.get('#stats_total_inventory_by_room_holder').within(()=>{
+            // Step 3: Pada section "Total Item Inventory By Merk", Pengguna dapat melihat statistik Pie Chart dan tabel Context dan Total
+            cy.get('#stats_total_inventory_by_merk_holder').should('exist').prev('h2').should('have.text','Total Item Inventory By Merk')
+            cy.get('#stats_total_inventory_by_merk_holder').within(()=>{
                 // Pie Chart
                 cy.get('.apexcharts-canvas').should('exist')
                 cy.get('.apexcharts-legend').should('exist')
