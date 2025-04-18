@@ -31,6 +31,7 @@ describe('GudangKu E2E Test - TC-ST-003 - Stats', () => {
 
                 let legend_labels = []
                 cy.get('.apexcharts-legend-text').each($text => {
+                    expect($text.text().trim()).to.be.a('string').to.not.equal('')
                     legend_labels.push($text.text().trim())
                 })
 
