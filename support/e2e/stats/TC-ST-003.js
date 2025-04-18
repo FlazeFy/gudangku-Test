@@ -1,5 +1,4 @@
 // Components
-import { generateRules } from '../../components/generator'
 import '../../components/template'
 
 describe('GudangKu E2E Test - TC-ST-002 - Stats', () => {
@@ -7,7 +6,7 @@ describe('GudangKu E2E Test - TC-ST-002 - Stats', () => {
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
 
-    it('Pengguna Dapat Melihat Statistik Total Inventory Berdasarkan Category', () => {
+    it('Pengguna Dapat Melihat Statistik Total Inventory Berdasarkan Room', () => {
         // Pre Condition : Pengguna sudah melakukan login ke dalam aplikasi
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: Setelah Login, Pengguna menekan tombol menu Stats
@@ -23,20 +22,16 @@ describe('GudangKu E2E Test - TC-ST-002 - Stats', () => {
                 cy.get('#toogle_total_view_select').should('exist').find('option:selected').should('have.text', 'Total By Item')
             })
             
-            // Step 3: Pada section "Total Item Inventory By Category", Pengguna dapat melihat statistik Pie Chart dan tabel Context dan Total
-            cy.get('#stats_total_inventory_by_category_holder').should('exist').prev('h2').should('have.text','Total Item Inventory By Category')
-            cy.get('#stats_total_inventory_by_category_holder').within(()=>{
+            // Step 3: Pada section "Total Item Inventory By Room", Pengguna dapat melihat statistik Pie Chart dan tabel Context dan Total
+            cy.get('#stats_total_inventory_by_room_holder').should('exist').prev('h2').should('have.text','Total Item Inventory By Room')
+            cy.get('#stats_total_inventory_by_room_holder').within(()=>{
                 // Pie Chart
                 cy.get('.apexcharts-canvas').should('exist')
                 cy.get('.apexcharts-legend').should('exist')
 
                 let legend_labels = []
-                // Validate Rules
-                const inventory_category_dct = generateRules('inventory_category')
                 cy.get('.apexcharts-legend-text').each($text => {
-                    const text = $text.text().trim()
-                    legend_labels.push(text)
-                    expect(inventory_category_dct).to.include(text)
+                    legend_labels.push($text.text().trim())
                 })
 
                 // Table

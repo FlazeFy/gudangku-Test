@@ -7,3 +7,9 @@ export const  generateAuthToken= (type) => {
 
     return res
 }
+
+export const generateRules = (type) => {
+    if(type == 'inventory_category'){
+        return ['Skin & Body Care','Fashion','Food And Beverages','Office Tools']
+    } 
+}
