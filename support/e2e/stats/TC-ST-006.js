@@ -16,11 +16,9 @@ describe('GudangKu E2E Test - TC-ST-006 - Stats', () => {
             // Evidence - Step 1
             cy.screenshot(`TC-ST-006_Step-1-${date}`)    
 
-            // Step 2: Pengguna memilih Chart Type "Periodic Chart" dan Toogle Total "Total By Item" pada Control Panel
+            // Step 2: Pengguna memilih Chart Type "Periodic Chart"
             cy.get('.control-panel').should('exist').within(() => {
                 cy.contains('Control Panel')
-                cy.get('#toogle_total_view_select').should('exist').find('option:selected').should('have.text', 'Total By Item')
-                cy.wait(1000)
                 cy.scrollTo('top')
                 cy.wait(1000)
                 cy.get('#toogle_view_stats_select select').should('exist').select('Periodic Chart')

@@ -2,21 +2,21 @@
 import { generateMonthName } from '../../components/generator'
 import '../../components/template'
 
-describe('GudangKu E2E Test - TC-ST-007 - Stats', () => {
+describe('GudangKu E2E Test - TC-ST-013 - Stats', () => {
     const username = 'flazefy'
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
 
-    it('Pengguna Dapat Melihat Statistik Total Report Yang Dibuat Berdasarkan Bulan', () => {
+    it('Pengguna Dapat Melihat Statistik Total Report Yang Digunakan Berdasarkan Bulan', () => {
         // Pre Condition : Pengguna sudah melakukan login ke dalam aplikasi
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: Setelah Login, Pengguna menekan tombol menu Stats
             cy.get('#nav_stats_btn').click()
             cy.url().should('include','/stats')
             // Evidence - Step 1
-            cy.screenshot(`TC-ST-007_Step-1-${date}`)    
+            cy.screenshot(`TC-ST-013_Step-1-${date}`)    
 
-            // Step 2: Pengguna memilih Chart Type "Periodic Chart"
+            // Step 2: Pengguna memilih Chart Type "Periodic Chart" dan Toogle Total "Total By Item" pada Control Panel
             cy.get('.control-panel').should('exist').within(() => {
                 cy.contains('Control Panel')
                 cy.scrollTo('top')
@@ -24,9 +24,9 @@ describe('GudangKu E2E Test - TC-ST-007 - Stats', () => {
                 cy.get('#toogle_view_stats_select select').should('exist').select('Periodic Chart')
             })
             
-            // Step 3: Pada section "Total Report Created Per Month", Pengguna dapat melihat statistik Line Chart dan tabel Context dan Total
-            cy.get('#stats_total_report_created_per_month').should('exist').prev('h2').contains('Total Report Created Per Month')
-            cy.get('#stats_total_report_created_per_month').within(()=>{
+            // Step 3: Pada section "Total Report Used Per Month", Pengguna dapat melihat statistik Line Chart dan tabel Context dan Total
+            cy.get('#stats_total_report_used_per_month').should('exist').prev('h2').contains('Total Report Used Per Month')
+            cy.get('#stats_total_report_used_per_month').within(()=>{
                 // Line Chart
                 cy.get('.apexcharts-canvas').should('exist')
                 cy.get('.apexcharts-xaxis').should('exist')
@@ -46,7 +46,7 @@ describe('GudangKu E2E Test - TC-ST-007 - Stats', () => {
                 })
 
                 // Table
-                const tableHeaders = ['Context', 'Total Report', 'Total Item']
+                const tableHeaders = ['Context', 'Total Checkout', 'Total Washlist']
                 let table_contexts = []
                 cy.get('table').within(() => {
                     // Validate table headers
