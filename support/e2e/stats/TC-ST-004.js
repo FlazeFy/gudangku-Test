@@ -23,7 +23,7 @@ describe('GudangKu E2E Test - TC-ST-004 - Stats', () => {
             })
             
             // Step 3: Pada section "Total Item Inventory By Favorite", Pengguna dapat melihat statistik Pie Chart dan tabel Context dan Total
-            cy.get('#stats_total_inventory_by_favorite_holder').should('exist').prev('h2').should('have.text','Total Item Inventory By Favorite')
+            cy.get('#stats_total_inventory_by_favorite_holder').should('exist').prev('h2').contains('have.text','Total Item Inventory By Favorite')
             cy.get('#stats_total_inventory_by_favorite_holder').within(()=>{
                 // Pie Chart
                 cy.get('.apexcharts-canvas').should('exist')

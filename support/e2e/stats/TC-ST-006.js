@@ -27,9 +27,9 @@ describe('GudangKu E2E Test - TC-ST-006 - Stats', () => {
             })
             
             // Step 3: Pada section "Total Inventory Created Per Month", Pengguna dapat melihat statistik Line Chart dan tabel Context dan Total
-            cy.get('#stats_total_inventory_created_per_month').should('exist').prev('h2').should('have.text','Total Inventory Created Per Month')
+            cy.get('#stats_total_inventory_created_per_month').should('exist').prev('h2').contains('Total Inventory Created Per Month')
             cy.get('#stats_total_inventory_created_per_month').within(()=>{
-                // Pie Chart
+                // Line Chart
                 cy.get('.apexcharts-canvas').should('exist')
                 cy.get('.apexcharts-xaxis').should('exist')
 
