@@ -16,7 +16,7 @@ describe('GudangKu E2E Test - TC-IN-002 - Inventory', () => {
             // Evidence - Step 1
             cy.screenshot(`TC-IN-002_Step-1-${date}`)
 
-            // Step 2: Pada section Control Panel, Pengguna mengisikan search by title dengan "test" dan list report akan tampil bagi report dengan judul terkait
+            // Step 2: Pada section Control Panel, Pengguna mengisikan search by title dengan "test" dan list inventory akan tampil bagi inventory dengan judul terkait
             cy.templateE2EOpenControlPanel()
             cy.templateE2ESearchControlPanel('#search_by_name_merk',search_name)
             cy.get('#inventory_holder').within(() => {
@@ -35,7 +35,7 @@ describe('GudangKu E2E Test - TC-IN-002 - Inventory', () => {
             // Evidence - Step 2
             cy.screenshot(`TC-IN-002_Step-2-${date}`)  
 
-            // Step 3: Pengguna kembali mengosongkan search by title dan akan menampilkan semua list report
+            // Step 3: Pengguna kembali mengosongkan search by title dan akan menampilkan semua list inventory
             cy.templateE2EOpenControlPanel()
             cy.templateE2ESearchControlPanel('#search_by_name_merk',' ')
             cy.get('#inventory_holder').within(() => {
