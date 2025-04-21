@@ -107,3 +107,12 @@ Cypress.Commands.add('templateE2ESelectControlPanel', (target,value) => {
         cy.wait(1000)
     })
 })
+Cypress.Commands.add('templateE2ESearchControlPanel', (target,value) => {
+    cy.get('.control-panel').should('exist').within(() => {
+        cy.contains('Control Panel')
+        cy.scrollTo('top')
+        cy.wait(1000)
+        cy.get(target).should('exist').type(value).blur()
+        cy.wait(1000)
+    })
+})
