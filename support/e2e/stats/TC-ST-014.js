@@ -23,6 +23,7 @@ describe('GudangKu E2E Test - TC-ST-014 - Stats', () => {
                 cy.wait(1000)
                 cy.get('#toogle_view_stats_select select').should('exist').select('Periodic Chart')
             })
+            // Evidence - Step 2
             cy.screenshot(`TC-ST-014_Step-2-${date}`)    
             
             // Step 3: Pada section "Total Report Spending Per Month", Pengguna dapat melihat statistik Line Chart dan tabel Context dan Total

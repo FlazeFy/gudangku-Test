@@ -23,6 +23,7 @@ describe('GudangKu E2E Test - TC-ST-015 - Stats', () => {
                 cy.wait(1000)
                 cy.get('#toogle_view_stats_select select').should('exist').select('Most Expensive')
             })
+            // Evidence - Step 2
             cy.screenshot(`TC-ST-015_Step-2-${date}`)   
             
             // Step 3: Pada section masing-masing context, Pengguna dapat melihat tabel Context dan Inventory Price
