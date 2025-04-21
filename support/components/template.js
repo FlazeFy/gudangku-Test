@@ -77,6 +77,7 @@ Cypress.Commands.add('templateValidateContain', (data, list, target) => {
     });
 });
 
+// E2E Template
 Cypress.Commands.add('templateE2ELogin', (username, password) => {
     const BASEURL = 'http://localhost:8000'
     const date = new Date().toISOString().replace(/:/g, '-')
@@ -87,4 +88,22 @@ Cypress.Commands.add('templateE2ELogin', (username, password) => {
     cy.get('#password-input').type(password)
     cy.get('#submit-login-btn').click()
     cy.url().should('include', '/')
+})
+Cypress.Commands.add('templateE2EOpenControlPanel', () => {
+    cy.get('.control-panel a[data-bs-toggle="collapse"]').then($link => {
+        cy.get('#collapseControl').then($panel => {
+            if (!$panel.hasClass('show')) {
+                cy.wrap($link).click()
+            }
+        })
+    })
+})
+Cypress.Commands.add('templateE2ESelectControlPanel', (target,value) => {
+    cy.get('.control-panel').should('exist').within(() => {
+        cy.contains('Control Panel')
+        cy.scrollTo('top')
+        cy.wait(1000)
+        cy.get(target).should('exist').select(value)
+        cy.wait(1000)
+    })
 })

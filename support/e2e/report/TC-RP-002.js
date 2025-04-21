@@ -17,20 +17,8 @@ describe('GudangKu E2E Test - TC-RP-002 - Report', () => {
 
             // Step 2: Pada section Control Panel, Pengguna memilih jenis sorting "Ascending by Title" untuk mengurutkan berdasarkan abjad judul secara menaik
             // dan list Report akan ditampilkan secara berurutan berdasarkan judul reportnya
-            cy.get('.control-panel a[data-bs-toggle="collapse"]').then($link => {
-                cy.get('#collapseControl').then($panel => {
-                    if (!$panel.hasClass('show')) {
-                        cy.wrap($link).click()
-                    }
-                })
-            })
-            cy.get('.control-panel').should('exist').within(() => {
-                cy.contains('Control Panel')
-                cy.scrollTo('top')
-                cy.wait(1000)
-                cy.get('#sorting').should('exist').select('Ascending by Title')
-                cy.wait(1000)
-            })
+            cy.templateE2EOpenControlPanel()
+            cy.templateE2ESelectControlPanel('#sorting','Ascending by Title')
             cy.get('#report_holder .report-box h2').then($els => {
                 // Report Title
                 const titles = [...$els].map(el => el.innerText.trim())
@@ -42,20 +30,8 @@ describe('GudangKu E2E Test - TC-RP-002 - Report', () => {
 
             // Step 3: Pengguna kembali memilih jenis sorting "Descending by Title "untuk mengurutkan berdasarkan abjad judul secara menurun
             // dan list Report akan ditampilkan secara berurutan berdasarkan judul reportnya
-            cy.get('.control-panel a[data-bs-toggle="collapse"]').then($link => {
-                cy.get('#collapseControl').then($panel => {
-                    if (!$panel.hasClass('show')) {
-                        cy.wrap($link).click()
-                    }
-                })
-            })
-            cy.get('.control-panel').should('exist').within(() => {
-                cy.contains('Control Panel')
-                cy.scrollTo('top')
-                cy.wait(1000)
-                cy.get('#sorting').should('exist').select('Descending by Title')
-                cy.wait(1000)
-            })
+            cy.templateE2EOpenControlPanel()
+            cy.templateE2ESelectControlPanel('#sorting','Descending by Title')
             cy.get('#report_holder .report-box h2').then($els => {
                 // Report Title
                 const titles = [...$els].map(el => el.innerText.trim())
