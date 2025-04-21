@@ -6,7 +6,7 @@ describe('GudangKu E2E Test - TC-RP-002 - Report', () => {
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
 
-    it('Pengguna Dapat Mengurutkan Report Yang Ditampilkan Menggunakan Control Panel Berdasarkan Judul', () => {
+    it('Pengguna Dapat Mengurutkan Report Yang Ditampilkan Menggunakan Control Panel Berdasarkan Title', () => {
         // Pre Condition : Pengguna sudah melakukan login ke dalam aplikasi
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: Setelah Login, Pengguna menekan tombol menu Report
@@ -19,22 +19,22 @@ describe('GudangKu E2E Test - TC-RP-002 - Report', () => {
             // dan list Report akan ditampilkan secara berurutan berdasarkan judul reportnya
             cy.templateE2EOpenControlPanel()
             cy.templateE2ESelectControlPanel('#sorting','Ascending by Title')
-            cy.get('#report_holder .report-box h2').then($els => {
+            cy.get('#report_holder .report-box h2').then($el => {
                 // Report Title
-                const titles = [...$els].map(el => el.innerText.trim())
+                const titles = [...$el].map(el => el.innerText.trim())
                 const sortedTitles = [...titles].sort()
                 expect(titles).to.deep.equal(sortedTitles)
             })
             // Evidence - Step 2
             cy.screenshot(`TC-RP-002_Step-2-${date}`)  
 
-            // Step 3: Pengguna kembali memilih jenis sorting "Descending by Title "untuk mengurutkan berdasarkan abjad judul secara menurun
+            // Step 3: Pengguna kembali memilih jenis sorting "Descending by Title" untuk mengurutkan berdasarkan abjad judul secara menurun
             // dan list Report akan ditampilkan secara berurutan berdasarkan judul reportnya
             cy.templateE2EOpenControlPanel()
             cy.templateE2ESelectControlPanel('#sorting','Descending by Title')
-            cy.get('#report_holder .report-box h2').then($els => {
+            cy.get('#report_holder .report-box h2').then($el => {
                 // Report Title
-                const titles = [...$els].map(el => el.innerText.trim())
+                const titles = [...$el].map(el => el.innerText.trim())
                 const sortedTitles = [...titles].sort().reverse()
                 expect(titles).to.deep.equal(sortedTitles)
             })
