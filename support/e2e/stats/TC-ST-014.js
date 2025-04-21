@@ -2,19 +2,19 @@
 import { generateMonthName } from '../../components/generator'
 import '../../components/template'
 
-describe('GudangKu E2E Test - TC-ST-013 - Stats', () => {
+describe('GudangKu E2E Test - TC-ST-014 - Stats', () => {
     const username = 'flazefy'
     const password = 'nopass123'
     const date = new Date().toISOString().replace(/:/g, '-')
 
-    it('Pengguna Dapat Melihat Statistik Total Report Yang Digunakan Berdasarkan Bulan', () => {
+    it('Pengguna Dapat Melihat Statistik Total Report Pengeluaran Berdasarkan Bulan', () => {
         // Pre Condition : Pengguna sudah melakukan login ke dalam aplikasi
         cy.templateE2ELogin(username, password).then(() => {
             // Step 1: Setelah Login, Pengguna menekan tombol menu Stats
             cy.get('#nav_stats_btn').click()
             cy.url().should('include','/stats')
             // Evidence - Step 1
-            cy.screenshot(`TC-ST-013_Step-1-${date}`)    
+            cy.screenshot(`TC-ST-014_Step-1-${date}`)    
 
             // Step 2: Pengguna memilih Chart Type "Periodic Chart" dan Toogle Total "Total By Item" pada Control Panel
             cy.get('.control-panel').should('exist').within(() => {
@@ -23,11 +23,11 @@ describe('GudangKu E2E Test - TC-ST-013 - Stats', () => {
                 cy.wait(1000)
                 cy.get('#toogle_view_stats_select select').should('exist').select('Periodic Chart')
             })
-            cy.screenshot(`TC-ST-013_Step-2-${date}`)   
+            cy.screenshot(`TC-ST-014_Step-2-${date}`)    
             
-            // Step 3: Pada section "Total Report Used Per Month", Pengguna dapat melihat statistik Line Chart dan tabel Context dan Total
-            cy.get('#stats_total_report_used_per_month').should('exist').prev('h2').contains('Total Report Used Per Month')
-            cy.get('#stats_total_report_used_per_month').within(()=>{
+            // Step 3: Pada section "Total Report Spending Per Month", Pengguna dapat melihat statistik Line Chart dan tabel Context dan Total
+            cy.get('#stats_total_report_spending_per_month').should('exist').prev('h2').contains('Total Report Spending Per Month')
+            cy.get('#stats_total_report_spending_per_month').within(()=>{
                 // Line Chart
                 cy.get('.apexcharts-canvas').should('exist')
                 cy.get('.apexcharts-xaxis').should('exist')
@@ -47,7 +47,7 @@ describe('GudangKu E2E Test - TC-ST-013 - Stats', () => {
                 })
 
                 // Table
-                const tableHeaders = ['Context', 'Total Checkout', 'Total Washlist']
+                const tableHeaders = ['Context', 'Total Price', 'Total Item', 'Average Price Per Item']
                 let table_contexts = []
                 cy.get('table').within(() => {
                     // Validate table headers
@@ -70,14 +70,25 @@ describe('GudangKu E2E Test - TC-ST-013 - Stats', () => {
                                     table_contexts.push(text.trim())
                                 })
                             })
-                            // Total Checkout & Total Washlist
+                            // Total Item
                             cy.get('td').then($tds => {
-                                [1, 2].forEach(idx => {
-                                    const text = $tds.eq(idx).text()
-                                    const total = parseFloat(text)
-                                    expect(total).to.be.a('number').and.to.be.least(0)
+                                const text = $tds.eq(2).text()
+                                const total = parseFloat(text)
+                                expect(total).to.be.a('number').and.to.be.least(0)
+                            })   
+                            // Total Price & Average Price Per Item
+                            cy.get('td').then($tds => {
+                                [1, 3].forEach(idx => {
+                                    cy.get('td').eq(idx).within(() => {
+                                        cy.root().invoke('text').then(text => {
+                                            expect(text.trim().startsWith('Rp. ')).to.be.true
+                                            const numericText = text.replace('Rp. ', '').replace(/\./g, '')
+                                            const total = parseFloat(numericText)
+                                            expect(total).to.be.a('number')
+                                        })
+                                    })
                                 })
-                            })                            
+                            })                    
                         })
                     })
                 })
