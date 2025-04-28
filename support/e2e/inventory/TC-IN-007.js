@@ -24,7 +24,7 @@ describe('GudangKu E2E Test - TC-IN-007 - Inventory', () => {
 
                     // Step 3: Pada pop up validasi, pengguna menekan tombol "Yes, Delete"
                     cy.get(`#${targetModal}`, { timeout: 5000 }).should('exist').then(() => {
-                        cy.screenshot(`TC-AU-005_Step-3-${date}`)
+                        cy.screenshot(`TC-IN-007_Step-3-${date}`)
                         cy.get(`#${targetModal}`).contains('Permanently Delete this item ')
                         cy.get(`#${targetModal}`).contains('a', 'Yes, Delete').click()
                     })
