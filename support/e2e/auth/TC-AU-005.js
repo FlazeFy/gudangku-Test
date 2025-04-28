@@ -18,7 +18,7 @@ describe('GudangKu E2E Test - TC-AU-005 - Auth', () => {
             // Step 2: Pengguna menekan tombol sign out
             cy.get('#sign_out_btn').click()
 
-            // Step 3: Pada pop up validasi, pengguna menekan tombol Yes, Sign Out
+            // Step 3: Pada pop up validasi, pengguna menekan tombol "Yes, Sign Out"
             cy.get('#modalSignOut', { timeout: 5000 }).should('exist').then(() => {
                 cy.screenshot(`TC-AU-005_Step-3-${date}`)
                 cy.get('#modalSignOut').contains('Are you sure want to leave this account?')

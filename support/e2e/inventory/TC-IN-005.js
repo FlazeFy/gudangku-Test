@@ -21,7 +21,7 @@ describe('GudangKu E2E Test - TC-IN-005 - Inventory', () => {
             cy.screenshot(`TC-IN-005_Step-1-${date}`)
 
             // Step 2: Pada table inventory, pilih inventory pertama yang memiliki status 'Favorite' dan tidak dalam kondisi deleted. Kemudian tekan tombol edit
-            cy.get('#inventory_tb tbody .inventory-tr').not('.deleted-inventory').each($el => {
+            cy.get('#inventory_tb tbody .inventory-tr').not('.deleted-inventory').first().then($el => {
                 const favorite_status = Cypress.$($el).find('.favorite-status').text().trim()
 
                 if (favorite_status.includes('Favorite')) {
