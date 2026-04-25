@@ -1,3 +1,6 @@
 /node_modules
 *.png
 audit/firebase/init.js
+/cypress/downloads
+/cypress/screenshots
+.env
